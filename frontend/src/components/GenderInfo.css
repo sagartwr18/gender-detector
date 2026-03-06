@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+.gender-info-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: clamp(14px, 2.2vw, 26px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255, 255, 255, 0.55), transparent 34%),
+    radial-gradient(circle at 88% 80%, rgba(255, 255, 255, 0.35), transparent 36%),
+    linear-gradient(160deg, #f2ede4 0%, #ebe3d9 52%, #e3ddd4 100%);
+}
+
+.gender-info-shell {
+  width: 100%;
+  height: 100%;
+  padding: clamp(14px, 1.9vw, 26px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(12px, 1.8vh, 20px);
+  overflow: hidden;
+}
+
+.gender-header {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.6vh, 14px);
+  align-items: center;
+  text-align: center;
+}
+
+.gender-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(0.66rem, 1.5vw, 0.76rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gender-main-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.2rem, 9vw, 4.4rem);
+  line-height: 0.92;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: #1b140e;
+}
+
+.gender-description {
+  max-width: 72ch;
+  text-align: justify;
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.17rem, 2vw, 1rem);
+  font-weight: bolder;
+  line-height: 1.5;
+  color: #554d43;
+}
+
+.traits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1.4vw, 14px);
+  align-content: center;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.trait-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: clamp(8px, 10vh, 74px);
+  padding: clamp(8px, 1.1vw, 11px);
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+
+.trait-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(0.95rem, 1.3vw, 0.88rem);
+  line-height: 1.35;
+  color: #312a23;
+  font-weight: 500;
+}
+
+.gender-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.gi-restart-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 999px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gi-restart-button:hover {
+  transform: translateY(-1px);
+}
+
+.gi-restart-button:active {
+  transform: translateY(0);
+}
+
+.male-theme .gender-label {
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.male-theme .trait-icon {
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.male-theme .gi-restart-button {
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.24);
+}
+
+.female-theme .gender-label {
+  color: #be185d;
+  background: #fce7f3;
+}
+
+.female-theme .trait-icon {
+  color: #be185d;
+  background: #fce7f3;
+}
+
+.female-theme .gi-restart-button {
+  color: #ffffff;
+  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  box-shadow: 0 14px 28px rgba(219, 39, 119, 0.24);
+}
+
+@media (max-width: 720px) {
+  .gender-info-page {
+    padding: 10px;
+  }
+
+  .traits-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .gender-description {
+    max-width: 95%;
+    font-size: 0.84rem;
+  }
+
+  .gi-restart-button {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+  }
+}

@@ -36,4 +36,61 @@
 
 .main-content {
   flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #f5f4f0;
+}
+
+.transition-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f5f4f0;
+}
+
+.camera-layer {
+  z-index: 10;
+}
+
+.camera-layer .camera-page {
+  min-height: 100%;
+  background: #f5f4f0;
+}
+
+.gender-info-layer {
+  z-index: 20;
+  background: #f5f4f0;
+}
+
+.restart-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.restart-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.restart-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.restart-button:active {
+  transform: translateY(0);
 }

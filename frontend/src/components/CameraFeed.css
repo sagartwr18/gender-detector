@@ -170,118 +170,194 @@ body {
   width: 15px; height: 15px;
 }
 
-/* ─── Result View ─── */
-.fullscreen-content {
-  position: fixed;
-  top: 77px; left: 0; right: 0; bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 24px;
-  z-index: 1000;
-  overflow-y: auto;
-  background: var(--bg);
-}
-
-.fade-content {
-  width: 100%;
-  max-width: 500px;
-  background: var(--surface);
-  border-radius: 24px;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-lg);
+/* ─── Gender Info Page (Grid Layout) ─── */
+.gender-info-page {
+  min-height: calc(100vh - 77px);
+  position: relative;
   overflow: hidden;
-}
-
-.result-header {
-  padding: 30px 32px 26px;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-.male-content   .result-header { background: var(--male-soft);   border-bottom: 1px solid var(--male-border); }
-.female-content .result-header { background: var(--female-soft); border-bottom: 1px solid var(--female-border); }
-
-.result-icon-wrap {
-  width: 54px; height: 54px;
-  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-}
-.male-content   .result-icon-wrap { background: var(--male-accent); }
-.female-content .result-icon-wrap { background: var(--female-accent); }
-.result-icon-wrap svg { color: #fff; width: 26px; height: 26px; }
-
-.result-header-text { display: flex; flex-direction: column; gap: 2px; }
-
-.result-label {
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-family: 'JetBrains Mono', monospace;
-}
-.male-content   .result-label { color: var(--male-accent); }
-.female-content .result-label { color: var(--female-accent); }
-
-.result-title {
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.025em;
-  line-height: 1.1;
+  padding: 40px 20px;
 }
 
-.result-body {
-  padding: 26px 32px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
+.gender-info-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
 }
 
-.result-paragraph {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.8;
+.gender-grid-container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 8px;
+  width: 100%;
+  max-width: 900px;
+  height: 80vh;
 }
 
-.result-points {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.result-points li {
-  font-size: 0.875rem;
-  color: var(--text-primary);
-  padding: 11px 14px;
+/* Div1 - MALE/FEMALE Title */
+.grid-div1 {
+  grid-column: span 2 / span 2;
+  grid-column-start: 3;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-weight: 500;
+  justify-content: center;
+}
+
+.gender-main-title {
+  font-size: 4rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.05em;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Div2 - Description */
+.grid-div2 {
+  grid-column: span 4 / span 4;
+  grid-row: span 3 / span 3;
+  grid-column-start: 2;
+  grid-row-start: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px;
+}
+
+.gender-description {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* Div3 - Points */
+.grid-div3 {
+  grid-column: span 4 / span 4;
+  grid-row: span 3 / span 3;
+  grid-column-start: 2;
+  grid-row-start: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.trait-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
   border-radius: 10px;
-  background: var(--surface-2);
-  border: 1px solid var(--border-soft);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.check-icon {
-  width: 20px; height: 20px;
-  border-radius: 50%;
+.trait-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
-.male-content   .check-icon { background: var(--male-soft);   color: var(--male-accent); }
-.female-content .check-icon { background: var(--female-soft); color: var(--female-accent); }
-.check-icon svg { width: 11px; height: 11px; }
 
-@media (max-width: 540px) {
-  .video-section  { aspect-ratio: 3/4; }
-  .result-header  { padding: 22px 20px; gap: 14px; }
-  .result-body    { padding: 20px; }
-  .result-title   { font-size: 1.4rem; }
+.trait-icon svg {
+  color: white;
+}
+
+.trait-text {
+  font-size: 0.9rem;
+  color: white;
+  font-weight: 500;
+}
+
+/* Restart Button */
+.grid-restart {
+  grid-column: span 2 / span 2;
+  grid-column-start: 3;
+  grid-row: 7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.restart-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.restart-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: white;
+  color: #333;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.restart-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .gender-grid-container {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    height: auto;
+    gap: 12px;
+  }
+  
+  .grid-div1 {
+    grid-column: span 4;
+    grid-column-start: 1;
+    grid-row: 1;
+  }
+  
+  .gender-main-title {
+    font-size: 3rem;
+  }
+  
+  .grid-div2 {
+    grid-column: span 4;
+    grid-column-start: 1;
+    grid-row: 2;
+  }
+  
+  .grid-div3 {
+    grid-column: span 4;
+    grid-column-start: 1;
+    grid-row: 3;
+  }
+  
+  .grid-restart {
+    grid-column: span 4;
+    grid-column-start: 1;
+    grid-row: 4;
+    margin-top: 10px;
+  }
 }
