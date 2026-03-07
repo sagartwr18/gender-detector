@@ -9,7 +9,6 @@ import {
   ScanFace,
   Brain,
   HeartHandshake,
-  RotateCcw,
 } from 'lucide-react';
 import "./GenderInfo.css";
 
@@ -27,7 +26,7 @@ const FEMALE_POINTS = [
   { icon: <Brain />, text: "Shows creativity and leadership qualities" },
 ];
 
-function GenderInfo({ gender, keyVal, onRestart }) {
+function GenderInfo({ gender, keyVal }) {
   const isMale = gender === "male";
   const points = isMale ? MALE_POINTS : FEMALE_POINTS;
   const title = isMale ? "MALE" : "FEMALE";
@@ -64,15 +63,6 @@ function GenderInfo({ gender, keyVal, onRestart }) {
             </motion.div>
           ))}
         </div>
-
-        {onRestart && (
-          <div className="gender-actions">
-            <button className="gi-restart-button" onClick={onRestart}>
-              <RotateCcw size={20} strokeWidth={2} />
-              <span>Scan Again</span>
-            </button>
-          </div>
-        )}
       </motion.section>
     </div>
   );

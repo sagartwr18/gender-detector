@@ -9,6 +9,7 @@ function App() {
   const [detectedGender, setDetectedGender] = useState(null);
   const [infoKey, setInfoKey] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const pendingCameraReturnRef = useRef(false);
   
   const cameraFeedRef = useRef(null);
   const genderInfoRef = useRef(null);
@@ -19,6 +20,39 @@ function App() {
     setIsAnimating(true);
     setDetectedGender(gender);
     setInfoKey(prev => prev + 1);
+  };
+
+  const animateBackToCamera = () => {
+    if (!detectedGender || !cameraFeedRef.current || !genderInfoRef.current) return;
+
+    setIsAnimating(true);
+
+    gsap.to(genderInfoRef.current, {
+      y: "100%",
+      duration: 0.6,
+      ease: "power3.inOut",
+      onComplete: () => {
+        gsap.to(cameraFeedRef.current, {
+          y: "0%",
+          duration: 0.6,
+          ease: "power3.out",
+          onComplete: () => {
+            setDetectedGender(null);
+            setInfoKey(prev => prev + 1);
+            setIsAnimating(false);
+          }
+        });
+      }
+    });
+  };
+
+  const handleCameraState = () => {
+    if (!detectedGender) return;
+    if (isAnimating) {
+      pendingCameraReturnRef.current = true;
+      return;
+    }
+    animateBackToCamera();
   };
 
   // Animate when detectedGender changes
@@ -45,31 +79,12 @@ function App() {
     }
   }, [detectedGender]);
 
-  const handleRestart = () => {
-    if (isAnimating) return;
-    
-    setIsAnimating(true);
-    
-    // Animate GenderInfo down (swipe out)
-    gsap.to(genderInfoRef.current, {
-      y: "100%",
-      duration: 0.6,
-      ease: "power3.inOut",
-      onComplete: () => {
-        // Bring CameraFeed back
-        gsap.to(cameraFeedRef.current, {
-          y: "0%",
-          duration: 0.6,
-          ease: "power3.out",
-          onComplete: () => {
-            setDetectedGender(null);
-            setInfoKey(prev => prev + 1);
-            setIsAnimating(false);
-          }
-        });
-      }
-    });
-  };
+  useEffect(() => {
+    if (!isAnimating && pendingCameraReturnRef.current && detectedGender) {
+      pendingCameraReturnRef.current = false;
+      animateBackToCamera();
+    }
+  }, [isAnimating, detectedGender]);
 
   return (
     <div className="app">
@@ -87,7 +102,10 @@ function App() {
           ref={cameraFeedRef} 
           className="transition-layer"
         >
-          <CameraFeed onGenderDetected={handleGenderDetected} />
+          <CameraFeed
+            onGenderDetected={handleGenderDetected}
+            onCameraState={handleCameraState}
+          />
         </div>
         
         {/* Gender Info Layer - Always rendered but initially hidden */}
@@ -98,8 +116,7 @@ function App() {
         >
           <GenderInfo 
             gender={detectedGender} 
-            keyVal={infoKey} 
-            onRestart={handleRestart}
+            keyVal={infoKey}
           />
         </div>
       </main>
